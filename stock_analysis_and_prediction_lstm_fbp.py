@@ -9,7 +9,7 @@ import plotly.express as px
 import torch
 
 # Load models
-lstm_model_path = "C:\\Users\\91776\\Downloads\\lstm_model.joblib"
+lstm_model_path = "lstm_model.joblib"
 fb_model_path = "fb_prophet_model.joblib"
 lstm_model = joblib.load(lstm_model_path)
 fb_model = joblib.load(fb_model_path)
