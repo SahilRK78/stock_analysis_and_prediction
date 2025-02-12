@@ -6,7 +6,6 @@ import yfinance as yf
 import plotly.graph_objects as go
 from prophet import Prophet
 import plotly.express as px
-import torch
 
 # Load models
 lstm_model_path = "lstm_model.joblib"
