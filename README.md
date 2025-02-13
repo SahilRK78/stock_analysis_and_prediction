@@ -63,5 +63,7 @@ Facebook Prophet Model: fb_prophet_model.joblib
 
 
 ****Try the App****
-You can try out the Stock Price Prediction App here https://stock-prediction-lstm-fbprophet.streamlit.app/
+
+You can try out the Stock Price Prediction App here:
+🔗 Stock Price Prediction App
 
