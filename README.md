@@ -29,7 +29,7 @@ Moving Averages (Plotly)
 
 **3. Time Series Forecasting Models**
 
-**ARIMA & SARIMAX:((Not Used in Deployment))** 
+**ARIMA & SARIMAX**((Not Used in Deployment)
 
 Traditional time series models used to analyze historical patterns and establish benchmark predictions.
 
