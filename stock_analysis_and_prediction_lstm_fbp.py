@@ -15,6 +15,9 @@ fb_model = joblib.load(fb_model_path)
 
 def load_stock_data(ticker, start_date, end_date):
     df = yf.download(ticker, start=start_date, end=end_date)
+    # Flatten multi-level columns if present (removes ticker like 'AAPL' from column names)
+    if isinstance(df.columns, pd.MultiIndex):
+        df.columns = df.columns.get_level_values(0)
     return df
 
 def plot_candlestick(df):
@@ -23,13 +26,18 @@ def plot_candlestick(df):
                                          high=df['High'],
                                          low=df['Low'],
                                          close=df['Close'])])
+    fig.update_layout(title='Candlestick Chart', xaxis_title='Date', yaxis_title='Price')
     return fig
 
 def plot_moving_average(df, ma_days):
     df[f'MA_{ma_days}'] = df['Close'].rolling(window=ma_days).mean()
     fig = go.Figure()
-    fig.add_trace(go.Scatter(x=df.index, y=df['Close'], name='Close Price'))
-    fig.add_trace(go.Scatter(x=df.index, y=df[f'MA_{ma_days}'], name=f'{ma_days}-day MA'))
+    fig.add_trace(go.Scatter(x=df.index, y=df['Close'], mode='lines', name='Close Price'))
+    fig.add_trace(go.Scatter(x=df.index, y=df[f'MA_{ma_days}'], mode='lines', name=f'{ma_days}-Day MA'))
+    fig.update_layout(title=f'{ma_days}-Day Moving Average',
+                      xaxis_title='Date',
+                      yaxis_title='Price',
+                      xaxis_rangeslider_visible=False)
     return fig
 
 def forecast_lstm(df, days):
@@ -68,7 +76,10 @@ end_date = st.date_input("End Date", value=pd.to_datetime("2025-01-01"))
 df = load_stock_data(ticker, start_date, end_date)
 st.subheader("Stock Data")
 st.dataframe(df)
-st.plotly_chart(plot_candlestick(df))
+if df.empty:
+    st.error("Failed to load data. Please adjust the date range or check your internet connection.")
+else:
+    st.plotly_chart(plot_candlestick(df))
 st.line_chart(df['Close']) 
 
 #view_option = st.radio("Choose Data View", ["Full Historical Data", "Selected Range Data"])
@@ -83,8 +94,9 @@ st.line_chart(df['Close'])
 #    st.plotly_chart(plot_candlestick(df_range))
 #    st.line_chart(df_range['Close'])
 
+
 ma_days = st.slider("Select Moving Average Days", 1, 250, 50)
-st.plotly_chart(plot_moving_average(df, ma_days))
+st.plotly_chart(plot_moving_average(df, ma_days), use_container_width=True)
 
 model_choice = st.radio("Choose Prediction Model", ["LSTM", "Facebook Prophet"])
 days = st.slider("Select Prediction Days (1-30)", 1, 30, 7)
