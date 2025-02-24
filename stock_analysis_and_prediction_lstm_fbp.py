@@ -71,7 +71,7 @@ st.title("Stock Price Prediction")
 
 ticker = st.text_input("Enter Stock Ticker (Ex: AAPL For Apple)", value="AAPL")
 start_date = st.date_input("Start Date", value=pd.to_datetime("2020-01-01"))
-end_date = st.date_input("End Date", value=pd.to_datetime("2025-01-01"))
+end_date = st.date_input("End Date", value=pd.to_datetime("2025-02-01"))
 
 df = load_stock_data(ticker, start_date, end_date)
 st.subheader("Stock Data")
