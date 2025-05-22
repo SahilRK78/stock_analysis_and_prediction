@@ -6,11 +6,13 @@ import yfinance as yf
 import plotly.graph_objects as go
 from prophet import Prophet
 import plotly.express as px
+from tensorflow.keras.models import load_model
 
 # Load models
-lstm_model_path = "lstm_model.joblib"
+lstm_model_path = "lstm_model.keras"
+lstm_model = load_model(lstm_model_path)
+
 fb_model_path = "fb_prophet_model.joblib"
-lstm_model = joblib.load(lstm_model_path)
 fb_model = joblib.load(fb_model_path)
 
 def load_stock_data(ticker, start_date, end_date):
