@@ -1,0 +1,6 @@
+{
+  "ticker": "AAPL",
+  "n_steps": 100,
+  "trained_through": "2026-07-31",
+  "data_start": "2016-08-02"
+}
