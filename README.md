@@ -1,68 +1,73 @@
-## Stock Price Prediction App
+## Stock Price Forecasting App
 
-This repository contains a Streamlit web application for stock price prediction using historical data. The project integrates multiple time series forecasting models, including ARIMA, SARIMAX, LSTM, and Facebook Prophet, to analyze stock trends and predict future prices.
+A Streamlit app for stock price forecasting, built on 10 years of AAPL data. Five models — Naive Baseline, ARIMA, SARIMAX, LSTM, and Facebook Prophet were trained and compared on the same leakage-free train/test split; LSTM and Prophet are the two deployed in the app.
 
-
-**Project Overview**
-
-**1. Data Collection**
-
-Historical stock price data is collected using the yfinance library.
-
-Users can select a stock symbol and retrieve data for analysis and forecasting.
+You can try out the Stock Price Prediction App [here](https://stock-price-analysis-forecasting-and-prediction.streamlit.app/).
 
 
+## Features
+Fetches historical stock market data using yfinance
+Supports different stock tickers and customizable date ranges
+Displays historical price trends using candlestick charts
+Calculates and visualizes moving averages
+Displays daily trading volume
+Generates 1–30 day forecasts
+Allows users to choose between LSTM and Facebook Prophet
+Compares forecasts with a Naive Baseline
+Provides forecast results as a downloadable CSV file
 
 
-**2. Exploratory Data Analysis (EDA)**
+## Exploratory Data Analysis
 
-Conducted detailed EDA on stock price data, analyzing trends and seasonality.
+The project includes exploratory analysis of:
 
-Visualizations include:
+Historical closing prices
+Trading volume
+Moving averages
+Daily returns
+Price trends
+Stationarity
+ACF and PACF
+Seasonal decomposition
 
-Close Price vs Year
+The complete methodology, EDA, model development, and evaluation are available in:
 
-Candlestick Chart (Plotly)
-
-Moving Averages (Plotly)
-
-
-**3. Time Series Forecasting Models**
-
-**ARIMA & SARIMAX**((Not Used in Deployment)
-
-Traditional time series models used to analyze historical patterns and establish benchmark predictions.
+notebooks/stock_forecasting_project.ipynb
 
 
-**Deep Learning & Advanced Forecasting Models** (Used in Deployment)
+## Models Used
+## 1. Naive Baseline
 
-**LSTM Model:** A Long Short-Term Memory (LSTM) neural network trained on a 10-year dataset to capture complex patterns in stock prices.
+Uses the previous day's closing price as the prediction for the next day.
 
-**Facebook Prophet:** A robust time series forecasting model that accounts for trends and seasonality.
+This provides a simple benchmark to determine whether the machine learning and statistical models provide meaningful improvement.
+
+## 2. ARIMA
+
+A classical time-series forecasting model used as a benchmark for univariate stock-price forecasting.
+
+## 3. SARIMAX
+
+An extension of ARIMA that can model seasonal patterns and incorporate additional variables when available.
+
+## 4. LSTM
+
+A Long Short-Term Memory neural network designed for sequential and time-series data.
+
+The deployed LSTM model consists of:
+
+lstm_model.keras
+scaler.joblib
+
+The model was trained using historical AAPL data.
+
+## 5. Facebook Prophet
+
+A time-series forecasting model developed by Facebook (Meta).
+
+Unlike the saved LSTM model, Prophet refits on the data selected by the user each time a forecast is requested. Therefore, it can be used with different stock tickers and does not depend on a fixed historical price range.
 
 
 
 
-**4. Deployment**
 
-The application is deployed using Streamlit Cloud, allowing users to:
-
-Select a stock and define forecast duration (1 to 30 days)
-
-Choose a prediction model (LSTM or Facebook Prophet)
-
-Visualize forecasts with interactive Plotly graphs
-
-
-
-**Model Files Used for Deployment**
-
-LSTM Model: lstm_model.joblib
-
-Facebook Prophet Model: fb_prophet_model.joblib
-
-
-## Try the App
-
-You can try out the Stock Price Prediction App [here](https://stock-prediction-lstm-fbprophet.streamlit.app/).
-https://stock-price-analysis-forecasting-and-prediction.streamlit.app/
