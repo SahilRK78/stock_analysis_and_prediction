@@ -88,7 +88,7 @@ The evaluation showed that no model consistently outperformed the naive baseline
 
 ## Known Limitations
 No model consistently outperformed the naive baseline for 1-day-ahead prediction, highlighting the difficulty of short-term stock-price forecasting.
-LSTM is trained only on AAPL, so predictions for other tickers are not reliable.
+LSTM is trained only on AAPL (Apple stock data), so predictions for other tickers are not reliable.
 
 
 ## Technologies
