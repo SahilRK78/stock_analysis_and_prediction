@@ -45,6 +45,16 @@ def load_stock_data(ticker, start_date, end_date):
     df = yf.download(ticker, start=start_date, end=end_date, auto_adjust=True)
     if isinstance(df.columns, pd.MultiIndex):
         df.columns = df.columns.get_level_values(0)
+
+    if df.empty:
+        # Retry once -- first request on a cold Streamlit Cloud container can
+        # transiently fail even when the ticker/date range is valid.
+        import time
+        time.sleep(1)
+        df = yf.download(ticker, start=start_date, end=end_date, auto_adjust=True)
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
+
     return df
  
  
@@ -146,8 +156,9 @@ if ticker != MODEL_TICKER:
     )
  
 df = load_stock_data(ticker, start_date, end_date)
- 
+
 if df.empty:
+    load_stock_data.clear()   # evict any bad cached empty result so the next attempt is fresh
     st.error(
         "No data returned. This can happen if the End Date is today or a non-trading day "
         "(weekend/holiday) with no data synced yet, or if the ticker symbol is invalid. "
