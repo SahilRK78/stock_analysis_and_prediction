@@ -31,8 +31,6 @@ except Exception as e:
     artifacts_ok = False
     st.error(
         "Could not load the LSTM model, scaler, or metadata. "
-        "Make sure lstm_model.keras, scaler.joblib, and model_metadata.json "
-        "are all in this folder (they come from the Colab notebook).\n\n"
         f"Details: {e}"
     )
     st.stop()
@@ -47,8 +45,7 @@ def load_stock_data(ticker, start_date, end_date):
         df.columns = df.columns.get_level_values(0)
 
     if df.empty:
-        # Retry once -- first request on a cold Streamlit Cloud container can
-        # transiently fail even when the ticker/date range is valid.
+        # Retry once 
         import time
         time.sleep(1)
         df = yf.download(ticker, start=start_date, end=end_date, auto_adjust=True)
@@ -158,7 +155,7 @@ if ticker != MODEL_TICKER:
 df = load_stock_data(ticker, start_date, end_date)
 
 if df.empty:
-    load_stock_data.clear()   # evict any bad cached empty result so the next attempt is fresh
+    load_stock_data.clear()   
     st.error(
         "No data returned. This can happen if the End Date is today or a non-trading day "
         "(weekend/holiday) with no data synced yet, or if the ticker symbol is invalid. "
