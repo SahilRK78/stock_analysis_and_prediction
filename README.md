@@ -61,14 +61,14 @@ An extension of ARIMA that can model seasonal patterns and incorporate additiona
 
 ## 4. LSTM
 
-A Long Short-Term Memory neural network designed for sequential and time-series data.
+A Long Short-Term Memory neural network designed for sequential and time-series data. The model was trained using historical AAPL data.
 
 The deployed LSTM model consists of:
 
 lstm_model.keras
+
 scaler.joblib
 
-The model was trained using historical AAPL data.
 
 ## 5. Facebook Prophet
 
