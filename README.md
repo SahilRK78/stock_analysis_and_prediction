@@ -22,15 +22,24 @@ Provides forecast results as a downloadable CSV file
 The project includes exploratory analysis of:
 
 Historical closing prices
+
 Trading volume
+
 Moving averages
+
 Daily returns
+
 Price trends
+
 Stationarity
+
 ACF and PACF
+
 Seasonal decomposition
 
+
 The complete methodology, EDA, model development, and evaluation are available in:
+
 
 notebooks/stock_forecasting_project.ipynb
 
