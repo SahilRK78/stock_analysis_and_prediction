@@ -68,6 +68,20 @@ A time-series forecasting model developed by Facebook (Meta).
 Unlike the saved LSTM model, Prophet refits on the data selected by the user each time a forecast is requested. Therefore, it can be used with different stock tickers and does not depend on a fixed historical price range.
 
 
+## Model Evaluation
+
+All models were evaluated using the same chronological train/test split to avoid data leakage.
+
+The Naive Baseline was included as an important benchmark because stock prices often behave similarly to a random walk.
+
+The evaluation showed that no model consistently outperformed the naive baseline for short-term, one-day-ahead stock-price prediction. This highlights the difficulty of predicting daily stock prices and demonstrates why a simple baseline should be included when evaluating time-series forecasting models.
 
 
+## Known Limitations
+No model consistently outperformed the naive baseline for 1-day-ahead prediction, highlighting the difficulty of short-term stock-price forecasting.
+LSTM is trained only on AAPL, so predictions for other tickers are not reliable.
 
+
+## Technologies
+
+Python | Pandas | NumPy | Scikit-learn | Statsmodels | TensorFlow/Keras | Prophet | yfinance | Streamlit | Plotly
