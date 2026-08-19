@@ -41,7 +41,7 @@ Seasonal decomposition
 The complete methodology, EDA, model development, and evaluation are available in:
 
 
-(Stock_price_analysis_and_forecasting.ipynb)
+Stock_price_analysis_and_forecasting.ipynb
 
 
 ## Models Used
